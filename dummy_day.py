@@ -2,7 +2,7 @@
 
 
 
-inputFile = 'input/01_input'
+inputFile = 'input/dummy_input'
 
 
 def dummy(d):
