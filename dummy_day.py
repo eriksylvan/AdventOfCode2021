@@ -1,7 +1,6 @@
 # https://adventofcode.com/2021/day/1
 
 
-
 inputFile = 'input/dummy_input'
 
 
@@ -13,7 +12,8 @@ def dummy(d):
     int: the duble input
     '''
     return d*2
-    
+
+
 def summy(l):
     '''Resturns the sum of all int in a list
     Parameters:
@@ -22,8 +22,9 @@ def summy(l):
     int: sum of all inputs
     '''
     return sum(l)
-    
-def file2intList(file):
+
+
+def file2intList(file): 
     '''Reads file return list with the items in file as int
     Parameters:
     file: the input file
@@ -36,14 +37,14 @@ def file2intList(file):
             for item in line.strip().split(' '):
                 list.append(int(item))
     return list
-        
+
 
 def day01PartOne():
     input = 1
     output = dummy(input)
 
     print(
-        f'Solution Day 01, Part one:\nAnswer: {output} \n\n')
+        f'# Solution Dummy, Part one:\n# Answer: {output} \n\n')
 
 
 def day01PartTwo():
@@ -51,7 +52,7 @@ def day01PartTwo():
     output = summy(input)
 
     print(
-        f'Solution Day 01, Part two:\nAnswer: {output} \n\n')
+        f'# Solution Dummy, Part two:\n# Answer: {output} \n\n')
 
 
 if __name__ == "__main__":

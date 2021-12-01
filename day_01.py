@@ -27,8 +27,8 @@ def depthIncreaseCounterSlidingWindow(sw):
         if dw>pdw:
             dc+=1
         pdw = dw
-
     
+    depthIncreaseCounter(
 
     return dc
 

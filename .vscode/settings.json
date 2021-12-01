@@ -12,5 +12,6 @@
         "./test",
         "-p",
         "test*.py"
-    ]
+    ],
+    "python.pythonPath": "venv_aoc/bin/python"
 }
