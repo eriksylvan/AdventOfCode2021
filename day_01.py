@@ -7,13 +7,15 @@ inputFile = 'input/01_input'
 def depthIncreaseCounter(sw):
     '''Returns the number of times a depth measurement increases
     '''
-    pd = sw[0]
-    dc = 0
-    for d in sw:
-        if d>pd:
-            dc += 1
-        pd = d
-    return dc
+    return sum((sw[i+1] > sw[i] for i in range(len(sw)-1)))
+            
+    # pd = sw[0]
+    # dc = 0
+    # for d in sw:
+    #     if d>pd:
+    #         dc += 1
+    #     pd = d
+    # return dc
 
 def depthIncreaseCounterSlidingWindow(sw):
     '''Returns the number of times a depth measurement increases in the 3 value sliding window
