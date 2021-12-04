@@ -34,3 +34,6 @@ b0=''.join(map(str,o0))
 r1 = int(b1,2)
 r2 = int(b0,2)
 print(r1*r2)
+
+print(sum([True,True,True]))
+print(sum([True,True,False]))

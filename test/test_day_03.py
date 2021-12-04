@@ -22,4 +22,4 @@ def test_runSubTryOne():
 
 
 # Run tests from terminal:
-# $ pytest test/test_day_02.py 
+# $ pytest test/test_day_03.py 
