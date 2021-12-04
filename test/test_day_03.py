@@ -14,11 +14,12 @@ testInput = ['00100',
 '00010',
 '01010']
 
-def test_runSubTryOne():
+def test_powerConsumption():
     assert day_03.calcge(testInput) == 198
 
 
-
+def test_lifeSupportRating():
+    assert day_03.calcLife(testInput) == 230
 
 
 # Run tests from terminal:

@@ -37,3 +37,5 @@ print(r1*r2)
 
 print(sum([True,True,True]))
 print(sum([True,True,False]))
+
+print('101010',int('101010',2))

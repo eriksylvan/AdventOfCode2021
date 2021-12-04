@@ -8,7 +8,6 @@ def calcge(inp):
     '''Returns product of gamma and epsilon
     '''
     output0 = [0]*len(inp[0])
-    print(output0)
     l = len(output0)
 
     for r in inp:
@@ -22,24 +21,58 @@ def calcge(inp):
     b0=''.join(map(str,o0))
     r1 = int(b1,2)
     r0 = int(b0,2)
-    print(output0, o0,o1,b0,b1,r0,r1)
     return r0*r1
 
-def runSubTryTwo(sw):
-    '''Returns the number of times a depth measurement increases
+def calcLife(inp):
+    '''Returns product multiply the oxygen generator rating and the CO2 scrubber rating
     '''
-    depth = 0
-    pos = 0    
-    aim = 0     
-    for d in sw:
-        if d[0]=='forward':
-            pos+=int(d[1])
-            depth+=aim * int(d[1])
-        elif d[0]=='up':
-            aim-=int(d[1])
-        else: #down
-            aim+=int(d[1])
-    return depth * pos
+    l = len(inp[0])
+    
+    def bitCriteria(keepMostCommon=True):
+        inpList=[]
+        for b in inp:
+            inpList.append([b,True])  #[0] = the bitvalue [1]=keep
+        kept=len(inp)
+        for i in range(l):
+            count1=0
+            # First bit
+            for r in inpList:
+                if r[1]:
+                    if r[0][i]=='1':
+                        count1+=1
+            
+            if keepMostCommon:
+                if count1>=kept/2: 
+                    mcb='1'
+                else: 
+                    mcb='0'
+            else:
+                if count1>=kept/2: 
+                    mcb='0'
+                else: 
+                    mcb='1'
+            
+            for r in inpList:
+                if r[1]:#Kept
+                    if r[0][i]==mcb:
+                        r[1]=True
+                    else:
+                        r[1]=False
+                        kept-=1
+                if kept==1:break
+            if kept==1:break 
+            
+        for i in inpList:
+            if i[1]:
+                ox=i[0]
+                return int(ox,2)
+    
+
+    oxi= bitCriteria(True)
+    co2= bitCriteria(False)
+        
+        
+    return oxi * co2
 
 
 def file2List(file):
@@ -59,29 +92,29 @@ def file2List(file):
 def day03PartOne():
     input = file2List(inputFile)
     output = calcge(input)
-    print(f'# Solution Day 02, Part one:\n# Answer: {output} \n\n')
+    print(f'# Solution Day 03, Part one:\n# Answer: {output} \n\n')
 
 
 def day03PartTwo():
     input = file2List(inputFile)
-    output = runSubTryTwo(input)
+    output = calcLife(input)
     print(
-        f'# Solution Day 02, Part two:\n# Answer: {output} \n\n')
+        f'# Solution Day 03, Part two:\n# Answer: {output} \n\n')
     pass
 
 
 if __name__ == "__main__":
     day03PartOne()
-    #day02PartTwo()
+    day03PartTwo()
 
 
-# Solution Day 02, Part one:
-# Answer: 2091984 
+# Solution Day 03, Part one:
+# Answer: 3985686 
 
 
-# Solution Day 02, Part two:
-# Answer: xxx 
+# Solution Day 03, Part two:
+# Answer: 2555739 
 
 
 # Run from terminal:
-# $ python day_01.py
+# $ python day_03.py
