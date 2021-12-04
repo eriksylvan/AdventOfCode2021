@@ -1,22 +1,29 @@
-# https://adventofcode.com/2021/day/2
+# https://adventofcode.com/2021/day/3
 
 
 
-inputFile = 'input/02_input.txt'
+inputFile = 'input/03_input'
    
-def runSubTryOne(sw):
-    '''Returns the number of times a depth measurement increases
+def calcge(inp):
+    '''Returns product of gamma and epsilon
     '''
-    depth = 0
-    pos = 0         
-    for d in sw:
-        if d[0]=='forward':
-            pos+=int(d[1])
-        elif d[0]=='up':
-            depth-=int(d[1])
-        else: #down
-            depth+=int(d[1])
-    return depth * pos
+    output0 = [0]*len(inp[0])
+    print(output0)
+    l = len(output0)
+
+    for r in inp:
+        for i, ch in zip(range(l), r):
+            output0[i]+=int(ch)
+        
+    l = len(inp)/2
+    o1 = ['1' if i>=l else '0' for i in output0]
+    o0 = ['0' if i>=l else '1' for i in output0]
+    b1=''.join(map(str,o1))
+    b0=''.join(map(str,o0))
+    r1 = int(b1,2)
+    r0 = int(b0,2)
+    print(output0, o0,o1,b0,b1,r0,r1)
+    return r0*r1
 
 def runSubTryTwo(sw):
     '''Returns the number of times a depth measurement increases
@@ -45,18 +52,17 @@ def file2List(file):
     list = []
     with open(file) as input:
         for line in input:
-            list.append(line.strip().split(' '))
+            list.append(line.strip())
     return list
         
 
-def day02PartOne():
+def day03PartOne():
     input = file2List(inputFile)
-    output = runSubTryOne(input)
-    print(
-        f'# Solution Day 02, Part one:\n# Answer: {output} \n\n')
+    output = calcge(input)
+    print(f'# Solution Day 02, Part one:\n# Answer: {output} \n\n')
 
 
-def day02PartTwo():
+def day03PartTwo():
     input = file2List(inputFile)
     output = runSubTryTwo(input)
     print(
@@ -65,8 +71,8 @@ def day02PartTwo():
 
 
 if __name__ == "__main__":
-    day02PartOne()
-    day02PartTwo()
+    day03PartOne()
+    #day02PartTwo()
 
 
 # Solution Day 02, Part one:

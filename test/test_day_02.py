@@ -1,11 +1,13 @@
 import pytest
 import day_02
     
+testInput = [['forward', '5'],['down', '5'],['forward', '8'],['up', '3'],['down', '8'],['forward', '2']]
+
 def test_runSubTryOne():
-    assert day_02.runSubTryOne([['forward', '5'],['down', '5'],['forward', '8'],['up', '3'],['down', '8'],['forward', '2']]) == 150
+    assert day_02.runSubTryOne(testInput) == 150
 
 def test_runSubTryTwo():
-    assert day_02.runSubTryTwo([['forward', '5'],['down', '5'],['forward', '8'],['up', '3'],['down', '8'],['forward', '2']]) == 900
+    assert day_02.runSubTryTwo(testInput) == 900
 
 
 
