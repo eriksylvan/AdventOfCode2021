@@ -6,7 +6,7 @@ inputFile = 'input/05_input'
    
 
 def file2List(file):
-    '''
+    '''Reads file with vectors on format ex '8,0 -> 0,8' returs list [8,0,0,8]
     Parameters:
     file: the input file
     Returns:
@@ -19,6 +19,8 @@ def file2List(file):
     return list
 
 def readVect(inp):
+    '''Reads list with vectors on format ex '8,0 -> 0,8' returs list with lists [8,0,0,8]
+    '''
     vectList = []
     for v in inp:
         pattern = "{x1:d},{y1:d} -> {x2:d},{y2:d}"
@@ -26,28 +28,28 @@ def readVect(inp):
         vectList.append([match.named.get('x1'), match.named.get('y1'), match.named.get('x2'), match.named.get('y2')])
     return vectList
 
+
 def plotVect(vect, diag=False):
+    '''Return a dictionalt rith all coordinates that the vector list covers
+    '''
     count = {}
     for v in vect:
         dx = abs(v[2]-v[0])
         dy = abs(v[3]-v[1])
-        if dx == 0:
-            for i in range(v[1],v[3]+1):
-                if not (v[0],i) in count: count[(v[0],i)] = 0
-                count[(v[0],i)]=count.get((v[0],i))+1
-        if dy == 0:
-            for i in range(v[0],v[2]+1):
-                if not (i, v[1]) in count: count[(i, v[1])] = 0
-                count[(i, v[1])]=count.get((i, v[1]))+1
+        
+        if v[0]>v[2]: xStep = -1 
+        else: xStep = 1
+        if v[1]>v[3]: yStep = -1
+        else: yStep = 1
         
         if dx == 0:
-            for i in range(v[3], v[1]+1):
+            for i in range(v[1],v[3]+yStep, yStep):
                 if not (v[0],i) in count: count[(v[0],i)] = 0
                 count[(v[0],i)]=count.get((v[0],i))+1
         if dy == 0:
-            for i in range(v[2], v[0]+1):
+            for i in range(v[0],v[2]+xStep, xStep):
                 if not (i, v[1]) in count: count[(i, v[1])] = 0
-                count[(i, v[1])]=count.get((i, v[1]))+1    
+                count[(i, v[1])]=count.get((i, v[1]))+1
  
         if dx!= 0 and dy!=0:
             if diag:
@@ -59,7 +61,6 @@ def plotVect(vect, diag=False):
                 for i,j in zip(range(v[0],v[2]+xStep, xStep), range(v[1],v[3]+yStep,yStep) ):
                     if not (i, j) in count: count[(i, j)] = 0
                     count[(i, j)]=count.get((i, j))+1    
-        
     return count    
 
 def findOverlaps(d):
@@ -68,10 +69,7 @@ def findOverlaps(d):
         if d[k] > 1:
             c+=1
     return c
-                
-            
-        
-                
+
 
                 
 def day05PartOne():
