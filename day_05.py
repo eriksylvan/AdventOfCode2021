@@ -26,7 +26,7 @@ def readVect(inp):
         vectList.append([match.named.get('x1'), match.named.get('y1'), match.named.get('x2'), match.named.get('y2')])
     return vectList
 
-def plotVect(vect):
+def plotVect(vect, diag=False):
     count = {}
     for v in vect:
         dx = abs(v[2]-v[0])
@@ -47,10 +47,27 @@ def plotVect(vect):
         if dy == 0:
             for i in range(v[2], v[0]+1):
                 if not (i, v[1]) in count: count[(i, v[1])] = 0
-                count[(i, v[1])]=count.get((i, v[1]))+1       
+                count[(i, v[1])]=count.get((i, v[1]))+1    
+ 
+        if dx!= 0 and dy!=0:
+            if diag:
+                if v[0]>v[2]: xStep = -1 
+                else: xStep = 1
+                if v[1]>v[3]: yStep = -1
+                else: yStep = 1
+                
+                for i,j in zip(range(v[0],v[2]+xStep, xStep), range(v[1],v[3]+yStep,yStep) ):
+                    if not (i, j) in count: count[(i, j)] = 0
+                    count[(i, j)]=count.get((i, j))+1    
         
-        
-    return count            
+    return count    
+
+def findOverlaps(d):
+    c=0
+    for k in (d):
+        if d[k] > 1:
+            c+=1
+    return c
                 
             
         
@@ -59,13 +76,18 @@ def plotVect(vect):
                 
 def day05PartOne():
     input = file2List(inputFile)
-    output = readVect(input)
+    v = readVect(input)
+    o = plotVect(v)
+    output = findOverlaps(o)
+    
     print(f'# Solution Day 05, Part one:\n# Answer: {output} \n\n')
 
 
 def day05PartTwo():
     input = file2List(inputFile)
-    output = "WIP"
+    v = readVect(input)
+    o = plotVect(v,diag=True)
+    output = findOverlaps(o)
     print(
         f'# Solution Day 05, Part two:\n# Answer: {output} \n\n')
     pass
@@ -75,7 +97,12 @@ if __name__ == "__main__":
     day05PartOne()
     day05PartTwo()
 
+# Solution Day 05, Part one:
+# Answer: 5835 
 
+
+# Solution Day 05, Part two:
+# Answer: 17013 
 
 
 

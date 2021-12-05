@@ -16,10 +16,19 @@ def test_readVect():
     output = day_05.readVect(testInput)
     assert output[9]==[5,5,8,2]
 
-def test_plotVect():
+def test_plotVectOverlaps():
     v = day_05.readVect(testInput)
     o = day_05.plotVect(v)
-    assert False
+    assert len(o) == 21
+    assert day_05.findOverlaps(o) == 5
+    
+def test_plotVectOverlapsVithDiagonals():
+    v = day_05.readVect(testInput)
+    o = day_05.plotVect(v,diag=True)
+    assert len(o) == 39
+    assert day_05.findOverlaps(o) == 12
+    
+
 
 # Run tests from terminal:
 # $ pytest test/test_day_05.py 
