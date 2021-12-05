@@ -39,3 +39,9 @@ print(sum([True,True,True]))
 print(sum([True,True,False]))
 
 print('101010',int('101010',2))
+
+import parse
+string = "shiny gold bags contain 2 dark red bags."
+pattern = "{outer_color} bags contain {num:d} {inner_color} bags."
+match = parse.search(pattern, string)
+print(match)
