@@ -19,19 +19,9 @@ def file2List(file):
                 list.append(int(item))
     return list
 
-def readVect(inp):
-    '''Reads list with vectors on format ex '8,0 -> 0,8' returs list with lists [8,0,0,8]
-    '''
-    vectList = []
-    for v in inp:
-        pattern = "{x1:d},{y1:d} -> {x2:d},{y2:d}"
-        match = parse.search(pattern, v)
-        vectList.append([match.named.get('x1'), match.named.get('y1'), match.named.get('x2'), match.named.get('y2')])
-    return vectList
-
 
 def Reporduce(fish=[], days = 1):
-    '''Return a List with the fich after a number of Days of reproduction
+    '''Return a List with the fish after a number of Days of reproduction
     '''
     nextGen = []
     for d in range(days):
@@ -45,6 +35,31 @@ def Reporduce(fish=[], days = 1):
         fish = nextGen.copy()
     return fish
 
+
+def Reporduce2(fish=[], days = 1):
+    '''Return number of fish after a number of Days of reproduction
+    Function gives same result as Reproduction()
+    '''
+    # Only keep track of the number of fishes in each age
+    
+    ages=[0]*9
+    for i in fish:
+        ages[i]+=1
+
+    for d in range(days):
+        a0=ages[0]
+        ages[0] = ages[1]
+        ages[1] = ages[2]
+        ages[2] = ages[3]
+        ages[3] = ages[4]
+        ages[4] = ages[5]
+        ages[5] = ages[6]
+        ages[6] = a0 + ages[7]
+        ages[7] = ages[8]
+        ages[8] = a0
+       
+    return sum(ages)
+
                
 def day06PartOne():
     input = file2List(inputFile)
@@ -55,14 +70,14 @@ def day06PartOne():
 
 def day06PartTwo():
     input = file2List(inputFile)
-    output = "WIP"
+    output = Reporduce2(input, 256)    
     print(f'# Solution Day 06, Part two:\n# Answer: {output} \n\n')
-    pass
+
 
 
 if __name__ == "__main__":
     day06PartOne()
-    #day06PartTwo()
+    day06PartTwo()
 
 # Solution Day 06, Part one:
 # Answer: 380758 

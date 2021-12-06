@@ -1,17 +1,16 @@
 {
    
-    "python.testing.pytestArgs": [
-        "."
-    ],
     "python.testing.unittestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true,
     "python.testing.unittestArgs": [
         "-v",
         "-s",
         "./test",
         "-p",
         "test*.py"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "test"
     ],
     "python.pythonPath": "venv_aoc/bin/python"
 }
