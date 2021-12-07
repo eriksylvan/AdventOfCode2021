@@ -83,6 +83,10 @@ if __name__ == "__main__":
 # Answer: 380758 
 
 
+# Solution Day 06, Part two:
+# Answer: 1710623015163 
+
+
 
 
 # Run from terminal:
