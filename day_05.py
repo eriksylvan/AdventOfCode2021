@@ -6,7 +6,7 @@ inputFile = 'input/05_input'
    
 
 def file2List(file):
-    '''Reads file with vectors on format ex '8,0 -> 0,8' returs list [8,0,0,8]
+    '''Reads file with vectors on format ex '8,0 -> 0,8' returs list of lines
     Parameters:
     file: the input file
     Returns:
