@@ -7,7 +7,7 @@ name: Test AdventOfCode2021
 on: [push]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
