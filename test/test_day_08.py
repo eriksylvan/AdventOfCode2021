@@ -47,4 +47,3 @@ def test_getSumFromExample():
 # Run tests from terminal:
 # $ pytest test/test_day_08.py 
 
-# , , , ]
