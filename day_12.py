@@ -43,11 +43,12 @@ def readMap(mp):
             
     return caveGrapf
 
-def findCavePath(caveGrapf):
+def findCavePath(caveGrapf, singleSmallCaveTwice = False):
     pathList = []
-    #visitedSmall = []   
+    pathTwice = []
+
     
-    def followPath(cave, path):
+    def followPath(cave, path, twiceUsed):
         # Check all path return True if path eads to end
         
         #Addnext cave to path stack
@@ -63,16 +64,19 @@ def findCavePath(caveGrapf):
         for nextCave in caveGrapf[cave]:
             # if next cave is small and already visited. then this path is not valid, remove current cave from bath and return
             if nextCave.islower() and nextCave in path:
-                #Dead end
-                pass
+                if (not twiceUsed) and (nextCave != 'start'):
+                    path = followPath(nextCave, path, True)    
+                else:
+                    #Dead end
+                    pass
             else:
-                path = followPath(nextCave, path)
+                path = followPath(nextCave, path, twiceUsed)
         path.pop()
         return path
 
                  
     path = []
-    path = followPath('start', path)
+    path = followPath('start', path, not singleSmallCaveTwice)
     return pathList 
 
             
@@ -89,7 +93,9 @@ def day12PartOne():
 
 def day12PartTwo():
     input = file2List(inputFile)
-    output = "WIP" 
+    caveMap = readMap(input)
+    numberOfPath = findCavePath(caveMap,singleSmallCaveTwice=True)
+    output = len(numberOfPath)
     
     print(f'# Solution Day 12, Part two:\n# Answer: {output} \n\n')
 
@@ -100,6 +106,12 @@ if __name__ == "__main__":
     day12PartTwo()
 
 
+# Solution Day 12, Part one:
+# Answer: 4338 
+
+
+# Solution Day 12, Part two:
+# Answer: 114189 
 
 
 # Run from terminal:

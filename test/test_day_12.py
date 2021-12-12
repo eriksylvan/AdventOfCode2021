@@ -38,5 +38,15 @@ def test_findNumberOfPath2():
     numberOfPath = day_12.findCavePath(gr)
     assert  len(numberOfPath) == 19
 
+def test_findNumberOfPathTwiceSmall1():
+    gr = day_12.readMap(map1)
+    numberOfPath = day_12.findCavePath(gr, singleSmallCaveTwice=True)
+    assert  len(numberOfPath) == 36
+  
+def test_findNumberOfPathTwiceSmall12():
+    gr = day_12.readMap(map2)
+    numberOfPath = day_12.findCavePath(gr, singleSmallCaveTwice=True)
+    assert  len(numberOfPath) == 103
+
 # Run tests from terminal:
 # $ pytest test/test_day_12.py 
