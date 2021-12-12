@@ -1,3 +1,16 @@
+s1="AC"
+s2="ac"
+s3="Ac"
+s4="cc"
+print(s1.isupper())
+print(s2.isupper())
+print(s3.isupper())
+print(s4.isupper())
+print(s4.islower())
+
+
+
+
 
 # i=range(9)
 # print([t<5 for t in i])
