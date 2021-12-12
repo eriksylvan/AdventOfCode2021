@@ -17,11 +17,12 @@ def file2List(file):
             list.append(line.strip())
     return list
 
-caveGrapf = {}
+
 
 
 
 def readMap(mp):
+    caveGrapf = {}
     for row in mp:
         rowSplit = row.split('-')
         name = rowSplit[0]
@@ -42,60 +43,46 @@ def readMap(mp):
             
     return caveGrapf
 
-def findCavePath():
-    pathList = ['start']
-    visitedSmall = []   
+def findCavePath(caveGrapf):
+    pathList = []
+    #visitedSmall = []   
     
-    def followPath(nextCave, path):
+    def followPath(cave, path):
         # Check all path return True if path eads to end
         
         #Addnext cave to path stack
-        path.append(nextCave)
-        
+        path.append(cave)
+        if cave=='end':
+            pathList.append(path.copy())
+            path.pop()
+            return path
         # If next cave is a small one then add to visited small
-        
-        # Iterate over all ways out from cave
-            # if next cave = 'end' tehn add path to avlid path
-            # if next cave is small and already visited. then this path is not valid, remove current cave from bath and return
-            # annars folowPath(nextCave, path) 
+        #if cave.islower(): visitedSmall.append(cave)
 
-        
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       '''
-        if nextCave=='end': 
-            return True # end found
-        for cave in caveGrapf[nextCave]:
-            if cave in visitedSmall:
-                #This small cave already visited, skip path
-                
-                return False
-            if cave.islower():
-                visitedSmall.append(cave)
-            if followPath(cave,path):
-                # end found
-                # save this path
-                pathList.append(path)
-        return False
-    '''
-    
-    p = []
-    followPath('start', p)
-    return 0
+        # Iterate over all ways out from cave
+        for nextCave in caveGrapf[cave]:
+            # if next cave is small and already visited. then this path is not valid, remove current cave from bath and return
+            if nextCave.islower() and nextCave in path:
+                #Dead end
+                pass
+            else:
+                path = followPath(nextCave, path)
+        path.pop()
+        return path
+
+                 
+    path = []
+    path = followPath('start', path)
+    return pathList 
+
             
     
                 
 def day12PartOne():
     input = file2List(inputFile)
     caveMap = readMap(input)
-    output = "WIP" 
+    numberOfPath = findCavePath(caveMap)
+    output = len(numberOfPath)
                
     print(f'# Solution Day 12, Part one:\n# Answer: {output} \n\n')
 

@@ -25,14 +25,18 @@ map2 = ["dc-end",
 def test_buildGraph():
     gr = day_12.readMap(map1)
     output = len(gr)
-    day_12.findCavePath()
     assert output == 6
+
+
+def test_findNumberOfPath1():
+    gr = day_12.readMap(map1)
+    numberOfPath = day_12.findCavePath(gr)
+    assert  len(numberOfPath) == 10
   
-def test_buildGraph2():
+def test_findNumberOfPath2():
     gr = day_12.readMap(map2)
-    output = len(gr)
-    g = day_12.findCavePath()
-    assert output == 7
+    numberOfPath = day_12.findCavePath(gr)
+    assert  len(numberOfPath) == 19
 
 # Run tests from terminal:
 # $ pytest test/test_day_12.py 
