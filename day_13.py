@@ -70,6 +70,18 @@ def fold(m, f, axis):
     
         
     return folded
+
+def printPaper(paper):
+    for row in paper:
+        for i in row:
+            if i == 1:
+                print('#',end='')
+            else:
+                print(' ',end='')
+        print()
+            
+            
+
                 
 def day13PartOne():
     inp = file2List(inputFile)
@@ -79,20 +91,38 @@ def day13PartOne():
     fAx = foInstr[0][0][-1]
     folded = fold(paper, fPos, fAx)
     output =  sum(sum(folded)) 
-    
-    
-    
                
     print(f'# Solution Day 13, Part one:\n# Answer: {output} \n\n')
 
 
 def day13PartTwo():
-    input = file2List(inputFile)
-    output = "WIP"
+    inp = file2List(inputFile)
+    paper = getPaperLayout(inp)
+    foInstr = getFoldingInstructions(inp)
+    for instr in foInstr:
+        fPos = instr[1]
+        fAx  = instr[0][-1]
+        paper = fold(paper, fPos, fAx)
     
-    print(f'# Solution Day 13, Part two:\n# Answer: {output} \n\n')
+    
+    print(f'# Solution Day 13, Part two:\n\n\n')
+    printPaper(paper)
+    print('\n\n')
+
+# Solution Day 13, Part one:
+# Answer: 618 
 
 
+# Solution Day 13, Part two:
+
+
+
+ ##  #    ###  #### #  # #### #  # #  # 
+#  # #    #  # #    # #  #    # #  #  # 
+#  # #    #  # ###  ##   ###  ##   #  # 
+#### #    ###  #    # #  #    # #  #  # 
+#  # #    # #  #    # #  #    # #  #  # 
+#  # #### #  # #### #  # #    #  #  ##  
 
 if __name__ == "__main__":
     day13PartOne()
