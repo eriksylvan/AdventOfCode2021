@@ -1,3 +1,31 @@
+import numpy as np
+
+
+
+a = np.matrix([[1, 0, 0, 0], [0, 0, 0, 0], [0,0,0, 0], [1,1,0, 0]])
+d = np.matrix([[1, 0, 0, 0], [0, 0, 0, 0]])
+''
+e = a[2:] | d
+
+
+b = np.flipud(a)
+c = a | b
+print(a)
+print(b)
+
+print(c)
+print(d)
+print(e)
+
+m = np.array([[1,2],[3,4]], int)
+m = np.rot90(m,-1)
+print(m)
+
+
+
+
+'''
+
 s1="AC"
 s2="ac"
 s3="Ac"
@@ -58,3 +86,6 @@ string = "shiny gold bags contain 2 dark red bags."
 pattern = "{outer_color} bags contain {num:d} {inner_color} bags."
 match = parse.search(pattern, string)
 print(match)
+
+
+'''
