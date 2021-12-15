@@ -204,6 +204,13 @@ if __name__ == "__main__":
 
 
 
+# Solution Day 14, Part one:
+# Answer: 2768 
+
+
+# Solution Day 14, Part two:
+# Answer: 2914365137499 
+
 
 # Run from terminal:
-# $ python day_12.py
+# $ python day_14.py

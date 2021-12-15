@@ -1,5 +1,4 @@
 import pytest
-from day_06 import day06PartTwo
 import day_14
 
 inp=["NNCB",
@@ -116,4 +115,4 @@ def test_step_40():
     assert result['H'] == 3849876073
 
 # Run tests from terminal:
-# $ pytest test/test_day_13.py 
+# $ pytest test/test_day_15.py 
