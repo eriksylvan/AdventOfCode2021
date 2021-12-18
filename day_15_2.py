@@ -48,6 +48,9 @@ def lessRiskyPath(caveGraph, fr, dest):
     
     
 def findMyWay(caveMap, dup=1):
+    cmi = len(caveMap)-1
+    cmj = len(caveMap[0])-1
+    
     mxi = len(caveMap)*dup-1
     mxj = len(caveMap[0]*dup)-1
     graph = defaultdict(list)
@@ -59,22 +62,22 @@ def findMyWay(caveMap, dup=1):
             if i!=0:
                 for f in range(dup):
                     for g in range(dup):
-                        graph[((i-1)*f,j*g)].append([(i,j),risk+f+g])
+                        graph[((i-1)+(cmi*f),j+(cmj*g))].append([(i+(cmi*f),j+(cmj*g)),risk+f+g])
             #south
-            if i!=mxi:
+            if i!=cmi:
                 for f in range(dup):
                     for g in range(dup):
-                        graph[((i+1)*f,j*g)].append([(i,j),risk+f+g])
+                        graph[((i+1)+(cmi*f),j+(cmj*g))].append([(i+(cmi*f),j+(cmj*g)),risk+f+g])
             #west
             if j!=0:
                 for f in range(dup):
                     for g in range(dup):
-                        graph[(i*f,(j-1)*g)].append([(i,j),risk+f+g])
+                        graph[(i+(cmi*f),(j-1)+(cmj*g))].append([(i+(cmi*f),j+(cmj*g)),risk+f+g])
             #east
-            if j!=mxj:
+            if j!=cmj:
                 for f in range(dup):
                     for g in range(dup):
-                        graph[(i*f,(j+1)*g)].append([(i,j),risk+f+g])
+                        graph[(i+(cmi*f),(j+1)+(cmj*g))].append([(i+(cmi*f),j+(cmj*g)),risk+f+g])
     
     start = (0,0)
     dest = (mxi,mxj)
@@ -96,7 +99,7 @@ def bigCave(cave):
 
 def day15PartOne():
     inp = file2List(inputFile)
-    output = findMyWay(inp)
+    output = findMyWay(inp,1)
     #output = "WIP"
     print(f'# Solution Day 15, Part one:\n# Answer: {output} \n\n')
 
@@ -111,7 +114,7 @@ def day15PartTwo():
 
 
 if __name__ == "__main__":
-    day15PartOne()
+ #   day15PartOne()
     day15PartTwo()
 
 # Solution Day 15, Part one:
