@@ -56,7 +56,8 @@ def findMyWay(caveMap):
             risk = int(r)
             #Todo: add border chriteria
             #north
-            if i!=0:graph[(i-1,j)].append([(i,j),risk])
+            if i!=0:
+                graph[(i-1,j)].append([(i,j),risk])
             #south
             if i!=mxi:graph[(i+1,j)].append([(i,j),risk])
             #west
@@ -91,6 +92,7 @@ def day15PartOne():
 
 def day15PartTwo():
     inp = file2List(inputFile)
+    output = findMyWay(inp)
     output = "WIP"
     
     print(f'# Solution Day 15, Part two:\n# Answer: {output} \n\n')
