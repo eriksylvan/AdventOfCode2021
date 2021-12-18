@@ -47,9 +47,9 @@ def lessRiskyPath(caveGraph, fr, dest):
     return risk    
     
     
-def findMyWay(caveMap):
-    mxi = len(caveMap)-1
-    mxj = len(caveMap[0])-1
+def findMyWay(caveMap, dup=1):
+    mxi = len(caveMap)*dup-1
+    mxj = len(caveMap[0]*dup)-1
     graph = defaultdict(list)
     for i, row in enumerate(caveMap):
         for j, r in enumerate(row):
@@ -57,13 +57,24 @@ def findMyWay(caveMap):
             #Todo: add border chriteria
             #north
             if i!=0:
-                graph[(i-1,j)].append([(i,j),risk])
+                for f in range(dup):
+                    for g in range(dup):
+                        graph[((i-1)*f,j*g)].append([(i,j),risk+f+g])
             #south
-            if i!=mxi:graph[(i+1,j)].append([(i,j),risk])
+            if i!=mxi:
+                for f in range(dup):
+                    for g in range(dup):
+                        graph[((i+1)*f,j*g)].append([(i,j),risk+f+g])
             #west
-            if j!=0:graph[(i,j-1)].append([(i,j),risk])
+            if j!=0:
+                for f in range(dup):
+                    for g in range(dup):
+                        graph[(i*f,(j-1)*g)].append([(i,j),risk+f+g])
             #east
-            if j!=mxj:graph[(i,j+1)].append([(i,j),risk])
+            if j!=mxj:
+                for f in range(dup):
+                    for g in range(dup):
+                        graph[(i*f,(j+1)*g)].append([(i,j),risk+f+g])
     
     start = (0,0)
     dest = (mxi,mxj)
@@ -92,8 +103,8 @@ def day15PartOne():
 
 def day15PartTwo():
     inp = file2List(inputFile)
-    output = findMyWay(inp)
-    output = "WIP"
+    output = findMyWay(inp,5)
+    #output = "WIP"
     
     print(f'# Solution Day 15, Part two:\n# Answer: {output} \n\n')
     
