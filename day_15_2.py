@@ -47,23 +47,38 @@ def lessRiskyPath(caveGraph, fr, dest):
     return risk    
     
     
-def findMyWay(caveMap):
-    mxi = len(caveMap)-1
-    mxj = len(caveMap[0])-1
+def findMyWay(caveMap, dup=1):
+    cmi = len(caveMap)
+    cmj = len(caveMap[0])
+    
+    mxi = len(caveMap)*dup-1
+    mxj = len(caveMap[0])*dup-1
+    print(mxi, mxj)
     graph = defaultdict(list)
     for i, row in enumerate(caveMap):
         for j, r in enumerate(row):
-            risk = int(r)
-            #Todo: add border chriteria
-            #north
-            if i!=0:
-                graph[(i-1,j)].append([(i,j),risk])
+            for f in range(dup):
+                for g in range(dup):     
+                    ii = i + cmi * f    
+                    jj = j + cmj * g   
+                    risk = int(r)+f+g
+                    if risk>9:
+                        risk=risk-9
+                    #north
+                    if ii!=0:
+                        graph[(ii-1),jj].append([(ii, jj), risk])
             #south
-            if i!=mxi:graph[(i+1,j)].append([(i,j),risk])
+                    if ii!=mxi:
+
+                        graph[((ii+1),jj)].append([(ii,jj),risk])
             #west
-            if j!=0:graph[(i,j-1)].append([(i,j),risk])
+                    if jj!=0:
+
+                        graph[(ii,(jj-1)) ].append([(ii, jj),risk])
             #east
-            if j!=mxj:graph[(i,j+1)].append([(i,j),risk])
+                    if jj!=mxj:
+
+                        graph[(ii,(jj+1))].append([(ii,jj),risk])
     
     start = (0,0)
     dest = (mxi,mxj)
@@ -85,15 +100,15 @@ def bigCave(cave):
 
 def day15PartOne():
     inp = file2List(inputFile)
-    output = findMyWay(inp)
+    output = findMyWay(inp,1)
     #output = "WIP"
     print(f'# Solution Day 15, Part one:\n# Answer: {output} \n\n')
 
 
 def day15PartTwo():
     inp = file2List(inputFile)
-    output = findMyWay(inp)
-    output = "WIP"
+    output = findMyWay(inp,5)
+    #output = "WIP"
     
     print(f'# Solution Day 15, Part two:\n# Answer: {output} \n\n')
     
