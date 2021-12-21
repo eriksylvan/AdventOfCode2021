@@ -2,9 +2,9 @@
 import random
 import itertools
 
-#inputFile = 'input/21_input.txt'
 
-
+# Part 1
+# linked list: Not nesesary... I thought I was smart and prepared for part 2. Liked list is not helping in part 2.
 class Board():
     def __init__(self, size = 10):
         self.size = 10
@@ -27,9 +27,6 @@ class Board():
             nx = nx.next
         return nx
 
-
-
-
 class Space():
     def __init__(self, nr, prev = None, nxt = None):
         self.nr = nr
@@ -38,19 +35,53 @@ class Space():
 
 
 
-def file2List(file):
-    '''Reads file, returs list of string
-    Parameters:
-    file: the input file
-    Returns:
-    list: output as list
+# Part 2
+
+# inspired by https://github.com/Fadi88/AoC/blob/master/2021/day21/code.py
+
+# Possible sum of 3 dises with 3 sides: 3, 4, 5, 6, 7, 8, 9
+# e.g (1+1+1), (1,1,2), (1,1,3), (1,2,1) ...
+# all combinations of [1,2,3] times 3 is given by iteritem.product([1, 2, 3], repeat=3)
+# the series can look like this
+# 3,4,5,4,5,6,5,6,7,4,5,6,5,6,7,6,7,8,5,6,7,6,7,8,7,8,9
+# 
+
+def playPart2(pos1, pos2, score1=0, score2=0, playerturn=0, knownResults={}):
     '''
-    list = []
+    Returns number of wins for [player1, player 2] for the given positions scora, and playerturn
+    '''
+
+    # knownResults is a case holding all results for a known input
+    # player = 0 => first player
+    # player = 1 => second player
+
+    if (pos1, pos2, score1, score2, playerturn) in knownResults:
+        return knownResults[(pos1, pos2, score1, score2, playerturn)]
+
+    wins = [0, 0] # countiung all wins for player1 and player2
+    rolls = [r1 + r2 + r3 for r1, r2, r3 in itertools.product([1, 2, 3], repeat=3)] #returning all pussible outcome of three dises rolling
+
+    for r in rolls:
+        pos = [pos1, pos2]
+        score = [score1, score2]
+
+        pos[playerturn] = (pos[playerturn] + r - 1) % 10 + 1    # New position for player after moving acorfing to dice roll
+        score[playerturn] += pos[playerturn]                    # New score for player after moving acorfing to dice roll
+
+        if score[playerturn] >= 21:     # we have a winner!!!
+            wins[playerturn] += 1
+        else:
+            # no winner, continue play with next player (deeper in the paralell universe... recursively)
+            w1, w2 = playPart2(pos[0], pos[1], score[0], score[1], 1 if playerturn == 0 else 0, knownResults)
+            wins[0] += w1
+            wins[1] += w2
+
+    # Save nober of wins in cache and return wins
+    knownResults[(pos1, pos2, score1, score2, playerturn)] = wins
     
-    with open(file) as input:
-        for line in input:
-            list.append(line.strip())
-    return list
+    return wins 
+
+
 
 def day21PartOne():
 #    inp = file2List(inputFile)
@@ -94,9 +125,13 @@ def day21PartOne():
 
 
 def day21PartTwo():
-    #inp = file2List(inputFile)
-    output = "WIP"
+    player1 = 8
+    player2 = 5
+    wins = playPart2(player1, player2)
+    # Pussle answer is maximum number of wins
+    output = max(wins)
     
+        
     print(f'# Solution Day 21, Part two:\n# Answer: {output} \n\n')
     
 
