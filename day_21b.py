@@ -56,7 +56,7 @@ def play_driac(p1, p2, s1=0, s2=0, player=0, cache={}):
             wins[1] += w2
 
     cache[(p1, p2, s1, s2, player)] = wins
-    cache[(p2, p1, s2, s1, 1 if player == 0 else 0)] = wins[::-1]
+    # cache[(p2, p1, s2, s1, 1 if player == 0 else 0)] = wins[::-1]  ### What 
     return wins
 
 
@@ -69,3 +69,7 @@ def part2():
 if __name__ == "__main__":
     print("Part 2")
     part2()
+
+
+# Part 2
+# 444356092776315
