@@ -1,5 +1,5 @@
 import numpy as np
-
+import cowsay
 
 
 a = np.matrix([[1, 0, 0, 0], [0, 0, 0, 0], [0,0,0, 0], [1,1,0, 0]])
@@ -21,7 +21,7 @@ m = np.array([[1,2],[3,4]], int)
 m = np.rot90(m,-1)
 print(m)
 
-
+cowsay.cow('Hello everybody!')
 
 
 '''
