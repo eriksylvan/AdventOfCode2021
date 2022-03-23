@@ -4,9 +4,9 @@
 
 name: Test AdventOfCode2021
 
-#on: [push]
 on: 
-  workflow_dispatch
+  push:
+  workflow_dispatch:
 
 jobs:
   test:
